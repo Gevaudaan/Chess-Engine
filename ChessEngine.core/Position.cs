@@ -15,6 +15,7 @@ namespace ChessEngineCore
         {
             X = x;
             Y = y;
+            
         }
 
         // Constructor de poscioines para índices 1D. calcula X e Y
