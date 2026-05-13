@@ -13,6 +13,7 @@ namespace ChessEngineCore
         public PieceColor Color { get; set; } 
         public Position CurrentPosition { get; set; }
 
+        
         //CONSTRUCTOR
         public Piece(PieceColor color)
         {
@@ -23,4 +24,5 @@ namespace ChessEngineCore
         public abstract bool IsValidMove(Position destination); //Funcion que definira si el movimiento es válido o no
         //public abstract bool IsValidMove(Position destination, Position CurrentPosition); //Misma función pero para pruebas
     }
+
 }

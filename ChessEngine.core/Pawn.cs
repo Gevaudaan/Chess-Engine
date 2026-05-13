@@ -27,18 +27,13 @@ namespace ChessEngineCore
 
             //----INICIO DE BLOQUE DE CODIGO TEMPORAL (Más adelante se delegara a la clase BOARD)--------------------------
 
-            if (destination.X < 0 || destination.X > 7)//Revisamos que la coordenada X no se salga del tablero
-            {
-                return false;
-            }
-
-            if (destination.Y < 0 || destination.Y > 7) //Revisamos que la coordenada Y no se salga del tablero
+            if (!FuncionesUtiles.OutOfBoard(destination))
             {
                 return false;
             }
 
             //----FIN DE BLOQUE DE CODIGO TEMPORAL ------------------------------------------------------------------------
-            
+
             if (moveDistanceX != 0)
             {
                 //temporal hasta implementar la captura de piezas

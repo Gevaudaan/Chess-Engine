@@ -1,37 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
 namespace ChessEngineCore
 {
-    public class Bishop:Piece
+    internal class Rook:Piece
     {
-        public Bishop(PieceColor color) : base(color)
+        public Rook(PieceColor color) : base(color)
         {
 
         }
 
-
-
-        //public override bool IsValidMove(Position destination, Position CurrentPosition)
         public override bool IsValidMove(Position destination)
         {
             int moveDistanceX = destination.X - CurrentPosition.X;
             int moveDistanceY = destination.Y - CurrentPosition.Y;
 
-            //----INICIO DE BLOQUE DE CODIGO TEMPORAL (Más adelante se delegara a la clase BOARD)--------------------------
             if (!FuncionesUtiles.OutOfBoard(destination))
             {
                 return false;
             }
 
-            //----FIN DE BLOQUE DE CODIGO TEMPORAL ------------------------------------------------------------------------
-
-            if (moveDistanceX != moveDistanceY)
+            if(moveDistanceX != 0 && moveDistanceY != 0)
             {
                 return false;
             }
-            return true; 
+
+            return true;
         }
     }
 }
