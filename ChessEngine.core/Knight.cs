@@ -4,17 +4,13 @@ using System.Text;
 
 namespace ChessEngineCore
 {
-    public class Bishop:Piece
+    public class Knight:Piece
     {
-        public Bishop(PieceColor color) : base(color)
-        {
-
+        public Knight(PieceColor color):base(color) { 
+        
         }
 
-
-
         public override bool IsValidMove(Position destination, Position CurrentPosition)
-        //public override bool IsValidMove(Position destination)
         {
             int moveDistanceX = destination.X - CurrentPosition.X;
             int moveDistanceY = destination.Y - CurrentPosition.Y;
@@ -24,14 +20,18 @@ namespace ChessEngineCore
             {
                 return false;
             }
-
-            //----FIN DE BLOQUE DE CODIGO TEMPORAL ------------------------------------------------------------------------
-
-            if (moveDistanceX != moveDistanceY)
+            //FIN DE BLOQUE TEMPORAL
+            if(moveDistanceX>2 || moveDistanceX < -2)
             {
                 return false;
             }
-            return true; 
+
+            if (moveDistanceY > 4 || moveDistanceX < -4)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

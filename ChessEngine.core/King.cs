@@ -5,13 +5,14 @@ using System.Text;
 
 namespace ChessEngineCore
 {
-    internal class King : Piece
+    public class King : Piece
     {
         public bool HasMoved;
         public King(PieceColor color) : base(color){
             
         }
-        public override bool IsValidMove(Position destination)
+        public override bool IsValidMove(Position destination, Position CurrentPosition)
+        //public override bool IsValidMove(Position destination)
         {
             int moveDistanceX = destination.X - CurrentPosition.X;
             int moveDistanceY = destination.Y - CurrentPosition.Y;

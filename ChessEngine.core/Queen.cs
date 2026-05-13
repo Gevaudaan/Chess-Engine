@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChessEngineCore
 {
-    internal class Queen:Piece
+    public class Queen:Piece
     {
 
         public Queen(PieceColor color) : base(color)
@@ -12,7 +12,8 @@ namespace ChessEngineCore
 
         }
 
-        public override bool IsValidMove(Position destination)
+        //public override bool IsValidMove(Position destination)
+        public override bool IsValidMove(Position destination, Position CurrentPosition)
         {
             int moveDistanceX = destination.X - CurrentPosition.X;
             int moveDistanceY = destination.Y - CurrentPosition.Y;

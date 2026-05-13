@@ -19,8 +19,8 @@ namespace ChessEngineCore
             isFirstMove = true;
         }
 
-        //public override bool IsValidMove(Position destination, Position CurrentPosition)
-        public override bool IsValidMove(Position destination)
+        public override bool IsValidMove(Position destination, Position CurrentPosition)
+        //public override bool IsValidMove(Position destination)
         {
             int moveDistanceX = destination.X - CurrentPosition.X; //Si se mueve siempre cero, si come, 1 o -1
             int moveDistanceY = destination.Y - CurrentPosition.Y; //peon blanco=1 o 2 || Peon negro=-1 o -2 dependiendo de si es su primer movimiento

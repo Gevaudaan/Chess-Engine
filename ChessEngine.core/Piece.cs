@@ -21,8 +21,8 @@ namespace ChessEngineCore
             
         }
         //public abstract int PosibleMoves(Position destination); //Funcion que calculara los posibles movimientos pasandole la coordenada del lugar adonde ir
-        public abstract bool IsValidMove(Position destination); //Funcion que definira si el movimiento es válido o no
-        //public abstract bool IsValidMove(Position destination, Position CurrentPosition); //Misma función pero para pruebas
+        //public abstract bool IsValidMove(Position destination); //Funcion que definira si el movimiento es válido o no
+        public abstract bool IsValidMove(Position destination, Position CurrentPosition); //Misma función pero para pruebas
     }
 
 }
