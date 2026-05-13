@@ -10,4 +10,8 @@
     <None Include="ChessEngineCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pieces\" />
+  </ItemGroup>
+
 </Project>
