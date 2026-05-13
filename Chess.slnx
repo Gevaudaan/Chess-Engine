@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ChessEngine.ConsoleUI/ChessEngine.ConsoleUI.csproj" />
+  <Project Path="ChessEngine.core/ChessEngineCore.csproj" />
+</Solution>

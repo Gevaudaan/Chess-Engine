@@ -1,0 +1,3 @@
+<ItemGroup>
+  <ProjectReference Include="..\ChessEngineCore\ChessEngineCore.csproj" />
+</ItemGroup>
