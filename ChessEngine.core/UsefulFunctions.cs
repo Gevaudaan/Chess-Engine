@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ChessEngineCore
 {
-    public static class FuncionesUtiles
+    public static class Funcs
     {
         public static bool OutOfBoard(Position destination)
         {
@@ -18,6 +18,7 @@ namespace ChessEngineCore
                 return false;
             }
             return true;
+       
         }
     }
 }

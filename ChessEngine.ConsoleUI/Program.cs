@@ -1,4 +1,5 @@
 ﻿using ChessEngineCore;
+using ChessEngineCore.Pieces;
 using System;
 using System.Collections;
 using System.Net.NetworkInformation;
