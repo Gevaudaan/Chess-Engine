@@ -12,13 +12,14 @@ namespace ChessEngineCore.Pieces
         private bool Alive { get; set; } //Si la pieza sigue viva o no
         public PieceColor Color { get; set; } 
         public Position CurrentPosition { get; set; }
+        public char Symbol { get; set; }
 
-        
+
         //CONSTRUCTOR
-        public Piece(PieceColor color)
+        public Piece(PieceColor color, char symbol)
         {
             Color = color;
-            
+            Symbol = symbol;
         }
         //public abstract int PosibleMoves(Position destination); //Funcion que calculara los posibles movimientos pasandole la coordenada del lugar adonde ir
         //public abstract bool IsValidMove(Position destination); //Funcion que definira si el movimiento es válido o no

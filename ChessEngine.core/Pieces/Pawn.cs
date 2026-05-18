@@ -13,7 +13,7 @@ namespace ChessEngineCore.Pieces
         //Metodos de la subclase:
 
         //Constructor:
-        public Pawn(PieceColor color):base(color)
+        public Pawn(PieceColor color, char symbol):base(color, symbol)
         {
             isFirstMove = true;
         }

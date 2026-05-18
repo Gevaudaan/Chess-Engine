@@ -8,7 +8,7 @@ namespace ChessEngineCore.Pieces
     public class King : Piece
     {
         public bool HasMoved;
-        public King(PieceColor color) : base(color){
+        public King(PieceColor color, char symbol) : base(color, symbol){
             
         }
         public override bool IsValidMove(Position destination, Position CurrentPosition)

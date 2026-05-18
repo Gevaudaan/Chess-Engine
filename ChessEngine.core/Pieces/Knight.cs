@@ -6,7 +6,8 @@ namespace ChessEngineCore.Pieces
 {
     public class Knight:Piece
     {
-        public Knight(PieceColor color):base(color) { 
+        public Knight(PieceColor color, char symbol) : base(color, symbol)
+        { 
         
         }
 

@@ -6,7 +6,7 @@ namespace ChessEngineCore.Pieces
 {
     public class Bishop:Piece
     {
-        public Bishop(PieceColor color) : base(color)
+        public Bishop(PieceColor color, char symbol) : base(color, symbol)
         {
 
         }
