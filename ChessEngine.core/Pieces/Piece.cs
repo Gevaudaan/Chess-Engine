@@ -12,11 +12,11 @@ namespace ChessEngineCore.Pieces
         private bool Alive { get; set; } //Si la pieza sigue viva o no
         public PieceColor Color { get; set; } 
         public Position CurrentPosition { get; set; }
-        public char Symbol { get; set; }
+        public string Symbol { get; set; }
 
 
         //CONSTRUCTOR
-        public Piece(PieceColor color, char symbol)
+        public Piece(PieceColor color, string symbol)
         {
             Color = color;
             Symbol = symbol;

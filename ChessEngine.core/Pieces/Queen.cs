@@ -7,7 +7,7 @@ namespace ChessEngineCore.Pieces
     public class Queen:Piece
     {
 
-        public Queen(PieceColor color, char symbol) : base(color, symbol)
+        public Queen(PieceColor color, string symbol) : base(color, symbol)
         {
 
         }

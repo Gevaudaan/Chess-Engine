@@ -7,7 +7,7 @@ namespace ChessEngineCore.Pieces
 {
     public class Rook:Piece
     {
-        public Rook(PieceColor color, char symbol) : base(color, symbol)
+        public Rook(PieceColor color, string symbol) : base(color, symbol)
         {
 
         }

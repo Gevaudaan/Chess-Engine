@@ -8,59 +8,66 @@ namespace ChessEngineCore
 {
     public class BoardCtrl
     {
-        private Piece?[] Board = new Piece?[128];
+        private Piece?[] _board = new Piece?[128];
 
-        public Piece?[] SetupBoard()
+        public void SetupBoard()
         {
-
-            Board[0] = new Rook(PieceColor.White, 'R');
-            Board[1] = new Knight(PieceColor.White, 'N');
-            Board[2] = new Bishop(PieceColor.White, 'B');
-            Board[3] = new Queen(PieceColor.White, 'Q');
-            Board[4] = new King(PieceColor.White, 'K');
-            Board[5] = new Bishop(PieceColor.White, 'B');
-            Board[6] = new Knight(PieceColor.White, 'N');
-            Board[7] = new Rook(PieceColor.White, 'R');
+            _board[0] = new Rook(PieceColor.White, "R ");
+            _board[1] = new Knight(PieceColor.White, "N ");
+            _board[2] = new Bishop(PieceColor.White, "B ");
+            _board[3] = new Queen(PieceColor.White, "Q ");
+            _board[4] = new King(PieceColor.White, "K ");
+            _board[5] = new Bishop(PieceColor.White, "B ");
+            _board[6] = new Knight(PieceColor.White, "N ");
+            _board[7] = new Rook(PieceColor.White, "R ");
             
 
-            for (int i = 8; i <= 127;i++) 
+            for (int i = 16; i <= 23;i++) 
             {
-                if (i > 15 && i <= 23)
-                {
-                    Board[i] = new Pawn(PieceColor.White, 'P');
-                }
-                else if (i >= 96 && i <= 103)
-                {
-                    Board[i] = new Pawn(PieceColor.Black, 'p');
-                }
-                else
-                {
-                    Board[i] = null;
-                }
+                _board[i] = new Pawn(PieceColor.White, "P ");
             }
-            Board[112] = new Rook(PieceColor.Black, 'r');
-            Board[113] = new Knight(PieceColor.Black, 'n');
-            Board[114] = new Bishop(PieceColor.Black, 'b');
-            Board[115] = new Queen(PieceColor.Black, 'q');
-            Board[116] = new King(PieceColor.Black, 'k');
-            Board[117] = new Bishop(PieceColor.Black, 'b');
-            Board[118] = new Knight(PieceColor.Black, 'n');
-            Board[119] = new Rook(PieceColor.Black, 'r');
 
-
-            return Board;
-        }
-        public void printBoard()
-        {
-            for(int i=0; i <= 127; i++)
+            for(int i=96;i<=103;i++)
             {
-                if (Board[i] != null)
+                _board[i] = new Pawn(PieceColor.Black, "p ");
+            }
+            _board[112] = new Rook(PieceColor.Black, "r ");
+            _board[113] = new Knight(PieceColor.Black, "n ");
+            _board[114] = new Bishop(PieceColor.Black, "b ");
+            _board[115] = new Queen(PieceColor.Black, "q ");
+            _board[116] = new King(PieceColor.Black, "k ");
+            _board[117] = new Bishop(PieceColor.Black, "b ");
+            _board[118] = new Knight(PieceColor.Black, "n ");
+            _board[119] = new Rook(PieceColor.Black, "r ");
+        }
+        public void PrintBoard()
+        {
+            int counter = 8;
+            for (int i=0; i <= 127; i++)
+            {
+                
+                if (_board[i] != null)
                 {
-                    Console.Write(Board[i]!.Symbol);
+                    Piece pieza = _board[i]!;
+                    Console.Write(pieza!.Symbol);
                 }
                 else
                 {
-                    Console.Write('.');
+                    if (counter<=i)
+                    {
+                        Console.Write(" ");
+                    }
+                    else
+                    {
+                        Console.Write(". ");
+                    }
+                        
+                }
+                
+                if ((i+1) % 16 == 0 && i!=0)
+                {
+                    Console.WriteLine();
+                    counter += 16;
                 }
 
             }

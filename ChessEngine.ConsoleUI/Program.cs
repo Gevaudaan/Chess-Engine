@@ -8,8 +8,8 @@ class Program
     static void Main()
     {
         var boardCtrl = new BoardCtrl(); 
-        Piece[] board = boardCtrl.SetupBoard();
-        boardCtrl.printBoard();
+        boardCtrl.SetupBoard();
+        boardCtrl.PrintBoard();
         Console.ReadLine();
     }
 }
