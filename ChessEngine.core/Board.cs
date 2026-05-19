@@ -8,9 +8,9 @@ namespace ChessEngineCore
 {
     public class BoardCtrl
     {
-        private Piece?[] _board = new Piece?[128];
+        private Piece?[] _board = new Piece?[128]; // new array that stores the Pieces and nulls
 
-        public void SetupBoard()
+        public void SetupBoard() //Function that sets up the board, assigning pieces to their respective index
         {
             _board[0] = new Rook(PieceColor.White, "R ");
             _board[1] = new Knight(PieceColor.White, "N ");
@@ -40,24 +40,25 @@ namespace ChessEngineCore
             _board[118] = new Knight(PieceColor.Black, "n ");
             _board[119] = new Rook(PieceColor.Black, "r ");
         }
-        public void PrintBoard()
+        public void PrintBoard() //Function that prints the board on the console
         {
-            int counter = 8;
+            int counter = 8;//Counter that will indicate the index that are out of the board
+
             for (int i=0; i <= 127; i++)
             {
                 
-                if (_board[i] != null)
+                if (_board[i] != null) //print the Pieces
                 {
                     Piece pieza = _board[i]!;
                     Console.Write(pieza!.Symbol);
                 }
                 else
                 {
-                    if (counter<=i)
+                    if (counter<=i) //if it's out of the board's limits, then it prints nothing.
                     {
-                        Console.Write(" ");
+                        Console.Write("");
                     }
-                    else
+                    else           //However, if it's in the board, it prints a dot.
                     {
                         Console.Write(". ");
                     }
@@ -67,7 +68,7 @@ namespace ChessEngineCore
                 if ((i+1) % 16 == 0 && i!=0)
                 {
                     Console.WriteLine();
-                    counter += 16;
+                    counter += 16; //Sets the next limit of the board
                 }
 
             }
