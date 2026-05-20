@@ -74,10 +74,21 @@ namespace ChessEngineCore
             }
         }
 
-        public void MakeMove(Position PieceToMoveIndex, Position Destination)
+        public void MakeMove(Position PieceToMoveIndex2D, Position Destination2D)
         {
+            int IndexofPieceToMove = Funcs.TwoDTo1d(PieceToMoveIndex2D);
+            int Destination = Funcs.TwoDTo1d(Destination2D);
 
-            
+            if (_board[IndexofPieceToMove] == null)
+            {
+                return;
+            }
+            if (_board[Destination] != null)
+            {
+                return;
+            }
+
+
         }
 
     }
