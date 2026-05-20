@@ -26,7 +26,7 @@ namespace ChessEngineCore
             {
                 _board[i] = new Pawn(PieceColor.White, "P ");
             }
-
+            
             for(int i=96;i<=103;i++)
             {
                 _board[i] = new Pawn(PieceColor.Black, "p ");
@@ -72,6 +72,12 @@ namespace ChessEngineCore
                 }
 
             }
+        }
+
+        public void MakeMove(Position PieceToMoveIndex, Position Destination)
+        {
+
+            
         }
 
     }

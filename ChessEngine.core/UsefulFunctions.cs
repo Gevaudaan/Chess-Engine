@@ -20,5 +20,12 @@ namespace ChessEngineCore
             return true;
        
         }
+
+        public static int TwoDTo1d(Position pos)
+        {
+            int index= (pos.Y * 16 + pos.X % 16);
+            return index;
+        }
+
     }
 }

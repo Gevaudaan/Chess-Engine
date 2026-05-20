@@ -18,11 +18,7 @@ namespace ChessEngineCore
             
         }
 
-        // Constructor de poscioines para índices 1D. calcula X e Y
-        //public Position(int indice1D)
-        //{
-        //    X = indice1D % 8;
-        //    Y = indice1D / 8;
-        //}
+        
     }
+    
 }
