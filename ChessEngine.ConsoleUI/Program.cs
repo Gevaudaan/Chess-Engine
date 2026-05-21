@@ -8,10 +8,11 @@ class Program
     static void Main()
     {
         Position position = new Position(2,0);
+        Position destino = new Position(4, 2);
         var boardCtrl = new BoardCtrl(); 
         boardCtrl.SetupBoard();
         boardCtrl.PrintBoard();
-
+        boardCtrl.MakeMove(position, destino);
         Console.ReadLine();
 
     }

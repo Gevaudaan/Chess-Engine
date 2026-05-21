@@ -74,17 +74,36 @@ namespace ChessEngineCore
             }
         }
 
-        public void MakeMove(Position PieceToMoveIndex2D, Position Destination2D)
+        public void MakeMove(Position sourceIndex2D, Position Destination2D)
         {
-            int IndexofPieceToMove = Funcs.TwoDTo1d(PieceToMoveIndex2D);
+            int sourceIndex = Funcs.TwoDTo1d(sourceIndex2D);
             int Destination = Funcs.TwoDTo1d(Destination2D);
 
-            if (_board[IndexofPieceToMove] == null)
+            Console.WriteLine("Español: La casilla seleccionada es: "+ sourceIndex);
+            Console.WriteLine("Español: La casilla destino seleccionada es: "+ Destination);
+
+            Type? pieceToMove = _board[sourceIndex]?.GetType();
+
+            
+            if (pieceToMove != null)
             {
-                return;
+                Console.WriteLine($"La pieza ubicada es un/a: {pieceToMove.Name}");
+                if (_board[sourceIndex].IsValidMove(Destination2D, sourceIndex2D))
+                {
+                    _board[Destination] = _board[sourceIndex];
+                    _board[sourceIndex] = null;
+                    PrintBoard();
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("Movimiento invalido");
+                }
             }
-            if (_board[Destination] != null)
+            else
             {
+                Console.WriteLine("Español: La casilla seleccionada está vacío.");
+                Console.WriteLine("English: The seleceted square is empty.");
                 return;
             }
 
