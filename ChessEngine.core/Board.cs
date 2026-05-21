@@ -85,8 +85,14 @@ namespace ChessEngineCore
             Type? pieceToMove = _board[sourceIndex]?.GetType();
 
             
-            if (pieceToMove != null)
+            if (pieceToMove == null)
+            
             {
+                Console.WriteLine("Español: La casilla seleccionada está vacío.");
+                Console.WriteLine("English: The seleceted square is empty.");
+                return;
+            }
+            
                 Console.WriteLine($"La pieza ubicada es un/a: {pieceToMove.Name}");
                 if (_board[sourceIndex].IsValidMove(Destination2D, sourceIndex2D))
                 {
@@ -99,14 +105,7 @@ namespace ChessEngineCore
                 {
                     Console.WriteLine("Movimiento invalido");
                 }
-            }
-            else
-            {
-                Console.WriteLine("Español: La casilla seleccionada está vacío.");
-                Console.WriteLine("English: The seleceted square is empty.");
-                return;
-            }
-
+            
 
         }
 
