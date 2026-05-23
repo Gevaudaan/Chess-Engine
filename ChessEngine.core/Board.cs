@@ -8,7 +8,7 @@ namespace ChessEngineCore
 {
     public class BoardCtrl
     {
-        private Piece?[] _board = new Piece?[128]; // new array that stores the Pieces and nulls
+        private readonly Piece?[] _board = new Piece?[128]; // new array that stores the Pieces and nulls
 
         public void SetupBoard() //Function that sets up the board, assigning pieces to their respective index
         {
@@ -20,14 +20,13 @@ namespace ChessEngineCore
             _board[5] = new Bishop(PieceColor.White, "B ");
             _board[6] = new Knight(PieceColor.White, "N ");
             _board[7] = new Rook(PieceColor.White, "R ");
-            
 
-            for (int i = 16; i <= 23;i++) 
+            for (int i = 16; i <= 23; i++)
             {
                 _board[i] = new Pawn(PieceColor.White, "P ");
             }
-            
-            for(int i=96;i<=103;i++)
+
+            for (int i = 96; i <= 103; i++)
             {
                 _board[i] = new Pawn(PieceColor.Black, "p ");
             }
@@ -40,13 +39,13 @@ namespace ChessEngineCore
             _board[118] = new Knight(PieceColor.Black, "n ");
             _board[119] = new Rook(PieceColor.Black, "r ");
         }
+
         public void PrintBoard() //Function that prints the board on the console
         {
             int counter = 8;//Counter that will indicate the index that are out of the board
 
-            for (int i=0; i <= 127; i++)
+            for (int i = 0; i <= 127; i++)
             {
-                
                 if (_board[i] != null) //print the Pieces
                 {
                     Piece pieza = _board[i]!;
@@ -54,7 +53,7 @@ namespace ChessEngineCore
                 }
                 else
                 {
-                    if (counter<=i) //if it's out of the board's limits, then it prints nothing.
+                    if (counter <= i) //if it's out of the board's limits, then it prints nothing.
                     {
                         Console.Write("");
                     }
@@ -62,15 +61,13 @@ namespace ChessEngineCore
                     {
                         Console.Write(". ");
                     }
-                        
                 }
-                
-                if ((i+1) % 16 == 0 && i!=0)
+
+                if ((i + 1) % 16 == 0 && i != 0)
                 {
                     Console.WriteLine();
                     counter += 16; //Sets the next limit of the board
                 }
-
             }
         }
 
@@ -79,35 +76,31 @@ namespace ChessEngineCore
             int sourceIndex = Funcs.TwoDTo1d(sourceIndex2D);
             int Destination = Funcs.TwoDTo1d(Destination2D);
 
-            Console.WriteLine("Español: La casilla seleccionada es: "+ sourceIndex);
-            Console.WriteLine("Español: La casilla destino seleccionada es: "+ Destination);
+            Console.WriteLine("Español: La casilla seleccionada es: " + sourceIndex);
+            Console.WriteLine("Español: La casilla destino seleccionada es: " + Destination);
 
             Type? pieceToMove = _board[sourceIndex]?.GetType();
 
-            
             if (pieceToMove == null)
-            
+
             {
                 Console.WriteLine("Español: La casilla seleccionada está vacío.");
                 Console.WriteLine("English: The seleceted square is empty.");
                 return;
             }
-            
-                Console.WriteLine($"La pieza ubicada es un/a: {pieceToMove.Name}");
-                if (_board[sourceIndex].IsValidMove(Destination2D, sourceIndex2D))
-                {
-                    _board[Destination] = _board[sourceIndex];
-                    _board[sourceIndex] = null;
-                    PrintBoard();
-                    return;
-                }
-                else
-                {
-                    Console.WriteLine("Movimiento invalido");
-                }
-            
 
+            Console.WriteLine($"La pieza ubicada es un/a: {pieceToMove.Name}");
+            if (_board[sourceIndex].IsValidMove(Destination2D, sourceIndex2D))
+            {
+                _board[Destination] = _board[sourceIndex];
+                _board[sourceIndex] = null;
+                PrintBoard();
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Movimiento invalido");
+            }
         }
-
     }
 }
