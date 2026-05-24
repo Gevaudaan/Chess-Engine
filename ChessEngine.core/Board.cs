@@ -43,9 +43,17 @@ namespace ChessEngineCore
         public void PrintBoard() //Function that prints the board on the console
         {
             int counter = 8;//Counter that will indicate the index that are out of the board
+            int rankCounter = 0;
+            Console.WriteLine("   A B C D E F G H");
 
             for (int i = 0; i <= 127; i++)
             {
+                if ((i - 16) % 16 == 0)
+                {
+                    rankCounter += 1;
+                    Console.Write(" " + rankCounter + " ");
+                }
+
                 if (_board[i] != null) //print the Pieces
                 {
                     Piece pieza = _board[i]!;
@@ -66,30 +74,29 @@ namespace ChessEngineCore
                 if ((i + 1) % 16 == 0 && i != 0)
                 {
                     Console.WriteLine();
-                    counter += 16; //Sets the next limit of the board
+                    counter += 16;//Sets the next limit of the board
                 }
             }
+            Console.WriteLine();
         }
 
         public void MakeMove(Position sourceIndex2D, Position Destination2D)
         {
-            int sourceIndex = Funcs.TwoDTo1d(sourceIndex2D);
+            int sourceIndex = Funcs.TwoDTo1d(sourceIndex2D); //we turn the 2D index of the piece we want to move and the index of it's destination into 1D index
             int Destination = Funcs.TwoDTo1d(Destination2D);
 
             Console.WriteLine("Español: La casilla seleccionada es: " + sourceIndex);
             Console.WriteLine("Español: La casilla destino seleccionada es: " + Destination);
 
-            Type? pieceToMove = _board[sourceIndex]?.GetType();
-
+            Type? pieceToMove = _board[sourceIndex]?.GetType(); //PieceToMove contains the type of piece (the name of the class) that user tried to move
+            
             if (pieceToMove == null)
-
             {
                 Console.WriteLine("Español: La casilla seleccionada está vacío.");
                 Console.WriteLine("English: The seleceted square is empty.");
                 return;
             }
-
-            Console.WriteLine($"La pieza ubicada es un/a: {pieceToMove.Name}");
+            Console.WriteLine($"La pieza a mover es un/a: {pieceToMove.Name}");
             if (_board[sourceIndex].IsValidMove(Destination2D, sourceIndex2D))
             {
                 _board[Destination] = _board[sourceIndex];
@@ -100,6 +107,7 @@ namespace ChessEngineCore
             else
             {
                 Console.WriteLine("Movimiento invalido");
+                return;
             }
         }
     }
