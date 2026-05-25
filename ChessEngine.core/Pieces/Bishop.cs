@@ -14,18 +14,13 @@ namespace ChessEngineCore.Pieces
 
 
         public override bool IsValidMove(Position destination, Position CurrentPosition)
-        //public override bool IsValidMove(Position destination)
         {
-            int moveDistanceX = destination.X - CurrentPosition.X;
-            int moveDistanceY = destination.Y - CurrentPosition.Y;
-
-            //----INICIO DE BLOQUE DE CODIGO TEMPORAL (Más adelante se delegara a la clase BOARD)--------------------------
+            int moveDistanceX = Math.Abs(destination.X - CurrentPosition.X);
+            int moveDistanceY = Math.Abs(destination.Y - CurrentPosition.Y);
             if (!Funcs.OutOfBoard(destination))
             {
                 return false;
             }
-
-            //----FIN DE BLOQUE DE CODIGO TEMPORAL ------------------------------------------------------------------------
 
             if (moveDistanceX != moveDistanceY)
             {

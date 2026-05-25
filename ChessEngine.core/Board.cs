@@ -80,15 +80,16 @@ namespace ChessEngineCore
             Console.WriteLine();
         }
 
-        public void MakeMove(Position sourceIndex2D, Position Destination2D)
+        public void MakeMove(Position sourceIndex2D, Position destination2D)
         {
             int sourceIndex = Funcs.TwoDTo1d(sourceIndex2D); //we turn the 2D index of the piece we want to move and the index of it's destination into 1D index
-            int Destination = Funcs.TwoDTo1d(Destination2D);
+            int destination = Funcs.TwoDTo1d(destination2D);
 
             Console.WriteLine("Español: La casilla seleccionada es: " + sourceIndex);
-            Console.WriteLine("Español: La casilla destino seleccionada es: " + Destination);
+            Console.WriteLine("Español: La casilla destino seleccionada es: " + destination);
 
             Piece? piece = _board[sourceIndex];
+            Piece? destinationPiece = _board[destination];
 
             if (piece == null)
             {
@@ -96,10 +97,25 @@ namespace ChessEngineCore
                 Console.WriteLine("English: The seleceted square is empty.");
                 return;
             }
-            Console.WriteLine($"La pieza a mover es un/a: {piece.GetType().Name}");
-            if (piece.IsValidMove(Destination2D, sourceIndex2D))
+
+            if (destinationPiece != null && piece.Color == destinationPiece.Color)
             {
-                _board[Destination] = piece;
+                Console.WriteLine("Español: Estas intentando comer una pieza aliada!");
+                Console.WriteLine("Friendly fire will not be tolerated.");
+                return;
+            }
+
+            if (!IsPathClear(sourceIndex2D, destination2D))
+            {
+                Console.WriteLine("Español: Camino obstruido");
+                Console.WriteLine("English: There is a piece blocking the way!");
+                return;
+            }
+
+            Console.WriteLine($"La pieza a mover es un/a: {piece.GetType().Name}");
+            if (piece.IsValidMove(destination2D, sourceIndex2D) && IsPathClear(sourceIndex2D, destination2D))
+            {
+                _board[destination] = piece;
                 _board[sourceIndex] = null;
                 PrintBoard();
             }
@@ -107,6 +123,34 @@ namespace ChessEngineCore
             {
                 Console.WriteLine("Movimiento invalido");
             }
+        }
+
+        private bool IsPathClear(Position sourceIndex2D, Position destination2D)
+        {
+            int sourceIndex = Funcs.TwoDTo1d(sourceIndex2D); //we turn the 2D index of the piece we want to move and the index of it's destination into 1D index
+            int destination = Funcs.TwoDTo1d(destination2D);
+            Piece? piece = _board[sourceIndex];
+
+            if (piece is Knight)
+            {
+                return true;
+            }
+            //The Math.Sign() method returns an integer that indicates whether a number is positive, negative, or zero.
+            int stepX = Math.Sign(destination2D.X - sourceIndex2D.X); // >0=1 Going to the right, <0=-1 going to the left, 0=0 doensn't move in the X axis
+            int stepY = Math.Sign(destination2D.Y - sourceIndex2D.Y);//>0=1 Going forward, <0=-1 going backwards, 0=0 doensn't move in the Y axis
+            int indexStep = (stepY * 16 + stepX);
+            int currentIndex = sourceIndex + indexStep;
+
+            while (currentIndex != destination)
+            {
+                if (_board[currentIndex] != null)
+                {
+                    return false;
+                }
+                currentIndex += indexStep;
+            }
+
+            return true;
         }
     }
 }

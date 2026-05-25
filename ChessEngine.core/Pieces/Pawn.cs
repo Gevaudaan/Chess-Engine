@@ -4,16 +4,15 @@ using System.Text;
 
 namespace ChessEngineCore.Pieces
 {
-    public class Pawn : Piece 
+    public class Pawn : Piece
     {
         //atributos de la subclase
         public bool isFirstMove { get; private set; }
 
-
         //Metodos de la subclase:
 
         //Constructor:
-        public Pawn(PieceColor color, string symbol):base(color, symbol)
+        public Pawn(PieceColor color, string symbol) : base(color, symbol)
         {
             isFirstMove = true;
         }
@@ -38,7 +37,7 @@ namespace ChessEngineCore.Pieces
                 //temporal hasta implementar la captura de piezas
                 return false;
             }
-            
+
             //Lógica de movimientos de peón blanco
             if (Color == PieceColor.White)
             {
@@ -46,7 +45,7 @@ namespace ChessEngineCore.Pieces
                 {
                     return true;
                 }
-                if(moveDistanceY == 2 && isFirstMove)
+                if (moveDistanceY == 2 && isFirstMove)
                 {
                     return true;
                 }
@@ -66,9 +65,5 @@ namespace ChessEngineCore.Pieces
             }
             return false;
         }
-        //public override int PosibleMoves(Position destination)
-        //{
-        //    return 0;
-        //}
     }
 }
