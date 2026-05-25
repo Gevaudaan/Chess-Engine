@@ -88,26 +88,24 @@ namespace ChessEngineCore
             Console.WriteLine("Español: La casilla seleccionada es: " + sourceIndex);
             Console.WriteLine("Español: La casilla destino seleccionada es: " + Destination);
 
-            Type? pieceToMove = _board[sourceIndex]?.GetType(); //PieceToMove contains the type of piece (the name of the class) that user tried to move
-            
-            if (pieceToMove == null)
+            Piece? piece = _board[sourceIndex];
+
+            if (piece == null)
             {
                 Console.WriteLine("Español: La casilla seleccionada está vacío.");
                 Console.WriteLine("English: The seleceted square is empty.");
                 return;
             }
-            Console.WriteLine($"La pieza a mover es un/a: {pieceToMove.Name}");
-            if (_board[sourceIndex].IsValidMove(Destination2D, sourceIndex2D))
+            Console.WriteLine($"La pieza a mover es un/a: {piece.GetType().Name}");
+            if (piece.IsValidMove(Destination2D, sourceIndex2D))
             {
-                _board[Destination] = _board[sourceIndex];
+                _board[Destination] = piece;
                 _board[sourceIndex] = null;
                 PrintBoard();
-                return;
             }
             else
             {
                 Console.WriteLine("Movimiento invalido");
-                return;
             }
         }
     }
