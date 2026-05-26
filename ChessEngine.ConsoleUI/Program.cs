@@ -14,6 +14,7 @@ namespace ChessEngine.ConsoleUI
             boardCtrl.SetupBoard();
             boardCtrl.PrintBoard();
             bool isCheckmate = false;
+
             while (!isCheckmate)
             {
                 Console.WriteLine("write the coordinate of the piece you want to move (from a1 to h8): ");
@@ -23,8 +24,29 @@ namespace ChessEngine.ConsoleUI
                 Console.WriteLine("write the coordinate of the square you want to move your piece to: ");
                 string destinationIndex = Console.ReadLine();
                 Position destino = Funcs.NormalizeIndex(destinationIndex);
-                boardCtrl.MakeMove(position, destino);
-                Console.ReadLine();
+
+                switch (boardCtrl.MakeMove(position, destino))
+                {
+                    case MoveResult.InvalidPattern:
+                        Console.WriteLine("Movimiento invalido");
+                        Console.WriteLine("Invalid move");
+                        break;
+
+                    case MoveResult.PathBlocked:
+                        Console.WriteLine("Camino obstruido");
+                        Console.WriteLine("There is a piece blocking the way!");
+                        break;
+
+                    case MoveResult.FriendlyFire:
+                        Console.WriteLine("Estas intentando comer una pieza aliada!");
+                        Console.WriteLine("Friendly fire will not be tolerated.");
+                        break;
+
+                    case MoveResult.SquareEmpty:
+                        Console.WriteLine("La casilla seleccionada está vacío.");
+                        Console.WriteLine("The seleceted square is empty.");
+                        break;
+                }
             }
         }
     }

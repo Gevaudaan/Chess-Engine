@@ -8,11 +8,13 @@ namespace ChessEngineCore.Pieces
     public class King : Piece
     {
         public bool HasMoved;
-        public King(PieceColor color, string symbol) : base(color, symbol){
-            
+
+        public King(PieceColor color, string symbol) : base(color, symbol)
+        {
+            HasMoved = false;
         }
+
         public override bool IsValidMove(Position destination, Position CurrentPosition)
-        //public override bool IsValidMove(Position destination)
         {
             int moveDistanceX = destination.X - CurrentPosition.X;
             int moveDistanceY = destination.Y - CurrentPosition.Y;
@@ -23,7 +25,7 @@ namespace ChessEngineCore.Pieces
             }
             if (HasMoved)
             {
-                if(moveDistanceX>2 || moveDistanceX < -2)
+                if (moveDistanceX > 2 || moveDistanceX < -2)
                 {
                     return false;
                 }
@@ -39,9 +41,7 @@ namespace ChessEngineCore.Pieces
                     return false;
                 }
             }
-                return true;
-
+            return true;
         }
-
     }
 }

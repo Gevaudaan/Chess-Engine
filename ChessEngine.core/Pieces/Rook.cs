@@ -5,11 +5,13 @@ using System.Text;
 
 namespace ChessEngineCore.Pieces
 {
-    public class Rook:Piece
+    public class Rook : Piece
     {
+        public bool isFirstMove { get; private set; }
+
         public Rook(PieceColor color, string symbol) : base(color, symbol)
         {
-
+            isFirstMove = true;
         }
 
         //public override bool IsValidMove(Position destination)
@@ -23,7 +25,7 @@ namespace ChessEngineCore.Pieces
                 return false;
             }
 
-            if(moveDistanceX != 0 && moveDistanceY != 0)
+            if (moveDistanceX != 0 && moveDistanceY != 0)
             {
                 return false;
             }

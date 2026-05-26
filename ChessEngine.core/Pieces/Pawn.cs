@@ -7,21 +7,22 @@ namespace ChessEngineCore.Pieces
     public class Pawn : Piece
     {
         //atributos de la subclase
-        public bool isFirstMove { get; private set; }
+        public bool IsFirstMove { get; private set; }
 
         //Metodos de la subclase:
 
         //Constructor:
         public Pawn(PieceColor color, string symbol) : base(color, symbol)
         {
-            isFirstMove = true;
+            IsFirstMove = true;
         }
 
-        public override bool IsValidMove(Position destination, Position CurrentPosition)
-        //public override bool IsValidMove(Position destination)
+        public override bool IsValidMove(Position destination, Position currentPosition)
         {
-            int moveDistanceX = destination.X - CurrentPosition.X; //Si se mueve siempre cero, si come, 1 o -1
-            int moveDistanceY = destination.Y - CurrentPosition.Y; //peon blanco=1 o 2 || Peon negro=-1 o -2 dependiendo de si es su primer movimiento
+            int moveDistanceX = destination.X - currentPosition.X; //Si se mueve siempre cero, si come, 1 o -1
+            int moveDistanceY = destination.Y - currentPosition.Y; //peon blanco=1 o 2 || Peon negro=-1 o -2 dependiendo de si es su primer movimiento
+            int forwardStep = Math.Sign(moveDistanceY) * moveDistanceY;
+            int sideStep = Math.Sign(moveDistanceX) * moveDistanceX;
 
             //----INICIO DE BLOQUE DE CODIGO TEMPORAL (Más adelante se delegara a la clase BOARD)--------------------------
 
@@ -32,37 +33,20 @@ namespace ChessEngineCore.Pieces
 
             //----FIN DE BLOQUE DE CODIGO TEMPORAL ------------------------------------------------------------------------
 
-            if (moveDistanceX != 0)
+            if (sideStep == 1 && forwardStep == 1)
             {
-                //temporal hasta implementar la captura de piezas
-                return false;
+                return true;
             }
 
-            //Lógica de movimientos de peón blanco
-            if (Color == PieceColor.White)
+            if (forwardStep == 1)
             {
-                if (moveDistanceY == 1)
-                {
-                    return true;
-                }
-                if (moveDistanceY == 2 && isFirstMove)
-                {
-                    return true;
-                }
+                return true;
+            }
+            if (forwardStep == 2 && IsFirstMove)
+            {
+                return true;
             }
 
-            //Lógica de movimientos de peón negro
-            if (Color == PieceColor.Black)
-            {
-                if (moveDistanceY == -1)
-                {
-                    return true;
-                }
-                if (moveDistanceY == -2 && isFirstMove)
-                {
-                    return true;
-                }
-            }
             return false;
         }
     }

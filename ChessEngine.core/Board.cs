@@ -6,6 +6,15 @@ using ChessEngineCore.Pieces;
 
 namespace ChessEngineCore
 {
+    public enum MoveResult
+    {
+        Success,
+        SquareEmpty,
+        InvalidPattern,
+        PathBlocked,
+        FriendlyFire
+    }
+
     public class BoardCtrl
     {
         private readonly Piece?[] _board = new Piece?[128]; // new array that stores the Pieces and nulls
@@ -80,48 +89,40 @@ namespace ChessEngineCore
             Console.WriteLine();
         }
 
-        public void MakeMove(Position sourceIndex2D, Position destination2D)
+        public MoveResult MakeMove(Position sourceIndex2D, Position destination2D)
         {
             int sourceIndex = Funcs.TwoDTo1d(sourceIndex2D); //we turn the 2D index of the piece we want to move and the index of it's destination into 1D index
             int destination = Funcs.TwoDTo1d(destination2D);
-
-            Console.WriteLine("Español: La casilla seleccionada es: " + sourceIndex);
-            Console.WriteLine("Español: La casilla destino seleccionada es: " + destination);
 
             Piece? piece = _board[sourceIndex];
             Piece? destinationPiece = _board[destination];
 
             if (piece == null)
             {
-                Console.WriteLine("Español: La casilla seleccionada está vacío.");
-                Console.WriteLine("English: The seleceted square is empty.");
-                return;
+                return MoveResult.SquareEmpty;
             }
 
             if (destinationPiece != null && piece.Color == destinationPiece.Color)
             {
-                Console.WriteLine("Español: Estas intentando comer una pieza aliada!");
-                Console.WriteLine("Friendly fire will not be tolerated.");
-                return;
+                return MoveResult.FriendlyFire;
             }
 
             if (!IsPathClear(sourceIndex2D, destination2D))
             {
-                Console.WriteLine("Español: Camino obstruido");
-                Console.WriteLine("English: There is a piece blocking the way!");
-                return;
+                return MoveResult.PathBlocked;
             }
 
-            Console.WriteLine($"La pieza a mover es un/a: {piece.GetType().Name}");
+            //Console.WriteLine($"La pieza a mover es un/a: {piece.GetType().Name}");
             if (piece.IsValidMove(destination2D, sourceIndex2D) && IsPathClear(sourceIndex2D, destination2D))
             {
                 _board[destination] = piece;
                 _board[sourceIndex] = null;
                 PrintBoard();
+                return MoveResult.Success;
             }
             else
             {
-                Console.WriteLine("Movimiento invalido");
+                return MoveResult.InvalidPattern;
             }
         }
 
