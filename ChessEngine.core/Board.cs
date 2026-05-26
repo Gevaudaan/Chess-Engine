@@ -53,14 +53,15 @@ namespace ChessEngineCore
         {
             int counter = 8;//Counter that will indicate the index that are out of the board
             int rankCounter = 0;
-            Console.WriteLine("   A B C D E F G H");
-
+            Console.WriteLine("    a b c d e f g h");
+            Console.WriteLine("  ┌─────────────────┐");
+            
             for (int i = 0; i <= 127; i++)
             {
                 if ((i - 16) % 16 == 0)
-                {
+                { 
                     rankCounter += 1;
-                    Console.Write(" " + rankCounter + " ");
+                    Console.Write(" " + rankCounter + "│ ");
                 }
 
                 if (_board[i] != null) //print the Pieces
@@ -82,11 +83,11 @@ namespace ChessEngineCore
 
                 if ((i + 1) % 16 == 0 && i != 0)
                 {
-                    Console.WriteLine();
+                    Console.WriteLine("│");
                     counter += 16;//Sets the next limit of the board
                 }
             }
-            Console.WriteLine();
+            Console.WriteLine("  └─────────────────┘");
         }
 
         public MoveResult MakeMove(Position sourceIndex2D, Position destination2D)
