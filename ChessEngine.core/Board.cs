@@ -18,6 +18,7 @@ namespace ChessEngineCore
     public class BoardCtrl
     {
         private readonly Piece?[] _board = new Piece?[128]; // new array that stores the Pieces and nulls
+        private bool isWhitesTurn = true;
 
         public void SetupBoard() //Function that sets up the board, assigning pieces to their respective index
         {
@@ -51,42 +52,72 @@ namespace ChessEngineCore
 
         public void PrintBoard() //Function that prints the board on the console
         {
-            int counter = 8;//Counter that will indicate the index that are out of the board
-            int rankCounter = 0;
-            Console.WriteLine("    a b c d e f g h");
-            Console.WriteLine("  ┌─────────────────┐");
+            int counter= 8;//Counter that will indicate the index that are out of the board
+            int rankCounter;
+            int start ;
+            int end;
+            int op;
+            string letters;
             
-            for (int i = 0; i <= 127; i++)
+            if (isWhitesTurn)
             {
-                if ((i - 16) % 16 == 0)
-                { 
-                    rankCounter += 1;
-                    Console.Write(" " + rankCounter + "│ ");
-                }
-
-                if (_board[i] != null) //print the Pieces
-                {
-                    Piece pieza = _board[i]!;
-                    Console.Write(pieza!.Symbol);
-                }
-                else
-                {
-                    if (counter <= i) //if it's out of the board's limits, then it prints nothing.
-                    {
-                        Console.Write("");
-                    }
-                    else           //However, if it's in the board, it prints a dot.
-                    {
-                        Console.Write(". ");
-                    }
-                }
-
-                if ((i + 1) % 16 == 0 && i != 0)
-                {
-                    Console.WriteLine("│");
-                    counter += 16;//Sets the next limit of the board
-                }
+                start = 0;
+                end = 127;
+                op = 1;
+                rankCounter = 0;
+                letters = "    a b c d e f g h";
+                counter = 8;
             }
+            else
+            {
+                start = -127;
+                end = 0;
+                op = -1;
+                rankCounter = 9;
+                letters = "    h g f e d c b a";
+                counter = -120;
+            }
+            int i2 = 0;
+            Console.WriteLine(letters);
+            Console.WriteLine("  ┌─────────────────┐");
+                for (int i = start; i <= end; i += 1)
+                {
+                
+                    if ((i2 - 16) % 16 == 0)
+                    {
+                        rankCounter += 1*op;
+                        Console.Write(" " + rankCounter + "│ ");
+                    }
+
+                    if (_board[i*op] != null) //print the Pieces
+                    {
+                        Piece pieza = _board[i * op]!;
+                        Console.Write(pieza!.Symbol);
+                    }
+                    else
+                    {
+                        if (counter <= i) //if it's out of the board's limits, then it prints nothing. //i va de -127 a 0 de 1 a 1 y counter va de -135 y se le suma 16 cada 16 posiciones
+                        {
+                            Console.Write("");
+                        }
+                        else           //However, if it's in the board, it prints a dot.
+                        {
+                            Console.Write(". ");
+                        }
+                    }
+
+                    if ((i2 + 1) % 16 == 0 && i2 != 0)
+                    {
+                        Console.WriteLine("│");
+                        counter += 8;//Sets the next limit of the board
+                        
+                    }
+                    i2 += 1;
+                    
+                }
+                
+       
+
             Console.WriteLine("  └─────────────────┘");
         }
 
@@ -118,6 +149,7 @@ namespace ChessEngineCore
             {
                 _board[destination] = piece;
                 _board[sourceIndex] = null;
+                isWhitesTurn=!isWhitesTurn;
                 PrintBoard();
                 return MoveResult.Success;
             }
