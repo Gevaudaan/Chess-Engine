@@ -52,14 +52,14 @@ namespace ChessEngineCore
 
         public void PrintBoard() //Function that prints the board on the console
         {
-            int counter= 8;//Counter that will indicate the index that are out of the board
+            int counter = 8;//Counter that will indicate the index that are out of the board
             int rankCounter;
-            int start ;
+            int start;
             int end;
             int op;
             string letters;
-            
-            if (isWhitesTurn)
+
+            if (!isWhitesTurn)
             {
                 start = 0;
                 end = 127;
@@ -80,23 +80,27 @@ namespace ChessEngineCore
             int i2 = 0;
             Console.WriteLine(letters);
             Console.WriteLine("  ┌─────────────────┐");
-                for (int i = start; i <= end; i += 1)
+            for (int i = start; i <= end; i += 1)
+            {
+                if ((i2 - 16) % 16 == 0)
                 {
-                
-                    if ((i2 - 16) % 16 == 0)
-                    {
-                        rankCounter += 1*op;
-                        Console.Write(" " + rankCounter + "│ ");
-                    }
+                    rankCounter += 1 * op;
+                    Console.Write(" " + rankCounter + "│ ");
+                }
 
-                    if (_board[i*op] != null) //print the Pieces
+                if (_board[i * op] != null) //print the Pieces
+                {
+                    Piece pieza = _board[i * op]!;
+                    Console.Write(pieza!.Symbol);
+                }
+                else
+                {
+                    if (!isWhitesTurn)
                     {
-                        Piece pieza = _board[i * op]!;
-                        Console.Write(pieza!.Symbol);
-                    }
-                    else
-                    {
-                        if (counter <= i) //if it's out of the board's limits, then it prints nothing. //i va de -127 a 0 de 1 a 1 y counter va de -135 y se le suma 16 cada 16 posiciones
+                        if (counter <= i) //if it's out of the board's limits, then it prints nothing.
+                                          //Turno Blancas: i va de 0 a 127 y counter empieza en 8 y se le suma 16 cada 16 posiciones
+                                          //Turno Negras: i va de -127 a 0 de 1 a 1 y empieza en -120 y se le suma 16 cada 16 posiciones
+
                         {
                             Console.Write("");
                         }
@@ -105,18 +109,29 @@ namespace ChessEngineCore
                             Console.Write(". ");
                         }
                     }
-
-                    if ((i2 + 1) % 16 == 0 && i2 != 0)
+                    else
                     {
-                        Console.WriteLine("│");
-                        counter += 8;//Sets the next limit of the board
-                        
+                        if (counter >= i) //if it's out of the board's limits, then it prints nothing.
+                                          //Turno Blancas: i va de 0 a 127 y counter empieza en 8 y se le suma 16 cada 16 posiciones
+                                          //Turno Negras: i va de -127 a 0 de 1 a 1 y empieza en -120 y se le suma 16 cada 16 posiciones
+
+                        {
+                            Console.Write("");
+                        }
+                        else           //However, if it's in the board, it prints a dot.
+                        {
+                            Console.Write(". ");
+                        }
                     }
-                    i2 += 1;
-                    
                 }
-                
-       
+
+                if ((i2 + 1) % 16 == 0 && i2 != 0)
+                {
+                    Console.WriteLine("│");
+                    counter += 16;//Sets the next limit of the board
+                }
+                i2 += 1;
+            }
 
             Console.WriteLine("  └─────────────────┘");
         }
@@ -149,7 +164,7 @@ namespace ChessEngineCore
             {
                 _board[destination] = piece;
                 _board[sourceIndex] = null;
-                isWhitesTurn=!isWhitesTurn;
+                isWhitesTurn = !isWhitesTurn;
                 PrintBoard();
                 return MoveResult.Success;
             }
