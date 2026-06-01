@@ -18,7 +18,7 @@ namespace ChessEngineCore
     public class BoardCtrl
     {
         private readonly Piece?[] _board = new Piece?[128]; // new array that stores the Pieces and nulls
-        private bool isWhitesTurn = true;
+        private bool isBlacksTurn = true;
 
         public void SetupBoard() //Function that sets up the board, assigning pieces to their respective index
         {
@@ -52,14 +52,14 @@ namespace ChessEngineCore
 
         public void PrintBoard() //Function that prints the board on the console
         {
-            int counter = 8;//Counter that will indicate the index that are out of the board
+            int counter;//Counter that will indicate the index that are out of the board
             int rankCounter;
             int start;
             int end;
             int op;
             string letters;
 
-            if (!isWhitesTurn)
+            if (!isBlacksTurn)
             {
                 start = 0;
                 end = 127;
@@ -95,7 +95,7 @@ namespace ChessEngineCore
                 }
                 else
                 {
-                    if (!isWhitesTurn)
+                    if (!isBlacksTurn)
                     {
                         if (counter <= i) //if it's out of the board's limits, then it prints nothing.
                                           //Turno Blancas: i va de 0 a 127 y counter empieza en 8 y se le suma 16 cada 16 posiciones
@@ -164,7 +164,7 @@ namespace ChessEngineCore
             {
                 _board[destination] = piece;
                 _board[sourceIndex] = null;
-                isWhitesTurn = !isWhitesTurn;
+                isBlacksTurn = !isBlacksTurn;
                 PrintBoard();
                 return MoveResult.Success;
             }
